@@ -1,7 +1,8 @@
 = How to
 
-- Install Antora CLI
+- Install Antora CLI https://docs.antora.org/antora/2.0/install/install-antora/
 - Run `antora site.yml`
+- Load `docs/index.html` (e.g. `xdg-open docs/index.html &>/dev/null`)
 
 
 This documentation is based on https://github.com/bartoszmajsak/istio-workspace/tree/docs
