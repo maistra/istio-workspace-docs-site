@@ -1,0 +1,7 @@
+= How to
+
+- Install Antora CLI
+- Run `antora site.yml`
+
+
+This documentation is based on https://github.com/bartoszmajsak/istio-workspace/tree/docs

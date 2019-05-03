@@ -1,0 +1,34 @@
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <a href="#">Istio Workspace</a>
+        <span class="separator">//</span>
+        <a href="{{or site.url (or siteRootUrl siteRootPath)}}">Docs</a>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>        
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Project</a>
+          <div class="navbar-dropdown">
+            <div class="navbar-item"><strong>GitHub</strong></div>
+            <a class="navbar-item" href="https://github.com/aslakknutsen/istio-workspace">Main repository</a>
+            <a class="navbar-item" href="https://github.com/aslakknutsen/istio-workspace/issues">Issue Tracker</a>
+          </div>
+        </div>        
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Fork it!</a>
+          </span>
+        </div>
+      </div>
+    </div>    
+  </nav>
+</header>
