@@ -1,5 +1,5 @@
-docs-workspace/
-site-workspace.yml
 .cache/
 public/
 node_modules/
+docs-dev/
+site-local-dev.yml
