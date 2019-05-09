@@ -1,8 +1,56 @@
-= How to
+:url-docs: https://github.com/bartoszmajsak/istio-workspace/tree/docs
 
-- Install Antora CLI https://docs.antora.org/antora/2.0/install/install-antora/
+== How to generate the docs
+
+- Install https://docs.antora.org/antora/2.0/install/install-antora/[Antora CLI ]
 - Run `antora site.yml`
-- Load `docs/index.html` (e.g. `xdg-open docs/index.html &>/dev/null`)
+- Load `docs/index.html` (e.g. by using `xdg-open docs/index.html &>/dev/null`)
 
+This documentation is generated from {url-docs}
 
-This documentation is based on https://github.com/bartoszmajsak/istio-workspace/tree/docs
+== Preview Mode
+
+This project comes with a preview mode too using which you can instantly see the changes of the docs you are working on.
+
+To use it script, run the following.
+
+. Install dependencies.
++
+[source,bash]
+----
+npm install gulp-cli -g
+npm install
+----
+
+. Install the LiveReload https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en[chrome extension].
+
+. Start the preview mode.
+The web server's host URL is printed to the console after the `watch` task completes.
++
+[source,bash]
+----
+gulp -d DOCS_DIRECTORY
+----
++
+Where `DOCS_DIRECTORY` points to your local clone of {url-docs}.
+
+. The console output will print status information every time a change is detected.
++
+[source,bash]
+----
+[20:09:56] Starting 'connect'...
+[20:09:56] Starting server...
+[20:09:56] Finished 'connect' after 4.96 ms
+[20:09:56] Starting 'watch'...
+[20:09:57] Finished 'watch' after 952 ms
+[20:09:57] Starting 'build'...
+[20:09:57] Istio Workspace Antora Doc Server started http://localhost:5353                         
+[20:09:57] LiveReload started on port 35729
+[20:09:57] Running server
+----
+
+. Make changes to your AsciiDoc files locally.
+
+The browser tab should automatically reload after a short while.
+
+image:https://i.imgur.com/EoYjuDF.gif[]
