@@ -14,16 +14,15 @@ This documentation is generated from {url-docs}
 
 == Preview Mode
 
-This project comes with a preview mode too using which you can instantly see the changes of the docs you are working on.
+This project comes with a preview mode too, using which you can instantly see the changes of the docs you are working on.
 
-To use it script, run the following.
+To use it, run the following:
 
 . Install dependencies.
 +
 [source,bash]
 ----
-npm install gulp-cli -g
-npm install
+npm run init
 ----
 
 . Install the LiveReload https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en[chrome extension].
@@ -38,9 +37,7 @@ gulp -d DOCS_DIRECTORY
 +
 Where `DOCS_DIRECTORY` points to your local clone of {url-docs}.
 
-
 TIP: If your docs and source repositories directories live next to each other (e.g. in the same parent folder) can simply run `npm rum preview` instead.
-
 
 . The console output will print status information every time a change is detected.
 +
