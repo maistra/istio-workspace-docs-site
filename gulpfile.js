@@ -81,7 +81,7 @@ gulp.task('default', ['connect', 'watch', 'build'])
 
 // Uses playbook specified through p/playbook option or creates one on the fly
 function loadDevPlaybook() {
-  const options = commandLineArgs(optionDefinitions)
+  const options = commandLineArgs(optionDefinitions, { partial: true })
   var filename = options.playbook
   let playbook = yaml.safeLoad(fs.readFileSync(options.source, 'UTF-8'));
 
