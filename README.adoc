@@ -2,7 +2,7 @@
 
 == Before you start
 
-- Make sure you have `node` and `nmp` installed
+- Make sure you have `node` and `npm` installed
 - `npm run init` 
 
 == Generate the docs
