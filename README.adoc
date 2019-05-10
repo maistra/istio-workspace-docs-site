@@ -1,10 +1,14 @@
 :url-docs: https://github.com/bartoszmajsak/istio-workspace/tree/docs
 
-== How to generate the docs
+== Before you start
 
-- Install https://docs.antora.org/antora/2.0/install/install-antora/[Antora CLI ]
-- Run `antora site.yml`
-- Load `docs/index.html` (e.g. by using `xdg-open docs/index.html &>/dev/null`)
+- Make sure you have `node` and `nmp` installed
+- `npm run init` 
+
+== Generate the docs
+
+- `npm run build`
+- `gulp open`
 
 This documentation is generated from {url-docs}
 
@@ -33,6 +37,10 @@ gulp -d DOCS_DIRECTORY
 ----
 +
 Where `DOCS_DIRECTORY` points to your local clone of {url-docs}.
+
+
+TIP: If your docs and source repositories directories live next to each other (e.g. in the same parent folder) can simply run `npm rum preview` instead.
+
 
 . The console output will print status information every time a change is detected.
 +
