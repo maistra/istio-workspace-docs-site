@@ -2,6 +2,10 @@
   "name": "docs-site",
   "description": "Maistra Istio Workspace Documentation Site",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bartoszmajsak/istio-workspace-docs-site.git"
+  },
   "dependencies": {
     "@antora/cli": "2.0.0",
     "@antora/site-generator-default": "2.0.0",
@@ -12,8 +16,8 @@
     "exit-hook": "2.2.0"
   },
   "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bartoszmajsak/istio-workspace-docs-site.git"
+  "scripts": {
+    "build": "gulp build -p site.yml",
+    "preview": "gulp -d ../istio-workspace"
   }
 }
