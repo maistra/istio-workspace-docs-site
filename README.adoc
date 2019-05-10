@@ -53,4 +53,4 @@ Where `DOCS_DIRECTORY` points to your local clone of {url-docs}.
 +
 The browser tab should automatically reload after a short while.
 +
-image:https://i.imgur.com/SObF8Sj.gif[]
+image:./supplemental-ui/assets/img/antora-live-reload.gif[]
