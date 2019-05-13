@@ -17,3 +17,6 @@ ui:
   supplemental_files: ./supplemental-ui
 output:
   dir: ./docs
+asciidoc:
+  extensions:
+  - asciidoctor-plantuml
