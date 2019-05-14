@@ -15,6 +15,7 @@ const generator = require('@antora/site-generator-default');
 const optionDefinitions = [
     {name: 'source', alias: 's', type: String, defaultValue: 'site.yml'},
     {name: 'playbook', alias: 'p', type: String},
+    {name: 'branch', alias: 'b', type: String, defaultValue: 'master'},
     {name: 'dir', alias: 'd', type: String, multiple: true},
     {name: 'output', alias: 'o', type: String, defaultValue: 'docs-dev'},
     {name: 'keep', alias: 'k', type: Boolean, defaultValue: false}
@@ -116,6 +117,7 @@ function loadDevPlaybook(options, playbook) {
 
     playbook.content.sources.forEach((e, i) => {
         e.url = options.dir[i % options.dir.length];
+        e.branches = [options.branch]
     });
 
     playbook.output.dir = options.output;
