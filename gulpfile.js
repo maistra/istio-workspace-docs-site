@@ -20,7 +20,10 @@ const optionDefinitions = [
     {name: 'keep', alias: 'k', type: Boolean, defaultValue: false}
 ];
 
-gulp.task('build', preparePlaybook(function (playbook, filename) {
+let playbook;
+let filename;
+
+gulp.task('build', preparePlaybook(function (playbook, filename, cb) {
     /**
      * Use the '@antora/site-generator-default' node module to build.
      * It's analogous to `$ antora --playbook site-dev.yml`.
@@ -35,37 +38,32 @@ gulp.task('build', preparePlaybook(function (playbook, filename) {
         filename
     ];
 
-    return function (cb) {
-        generator(args, process.env).then(() => {
-            cb();
-        }).catch(err => {
-            console.log(err);
-            cb();
-        })
-    }
+    generator(args, process.env).then(() => {
+        cb();
+    }).catch(err => {
+        console.log(err);
+        cb();
+    })
+
 }));
 
-gulp.task('preview', ['build'], preparePlaybook(function () {
+gulp.task('preview', ['build'], function () {
     /**
      * Remove the line gulp.src('README.adoc')
      * This is placeholder code to follow the gulp-connect
      * example. Could not make it work any other way.
      */
-    return function () {
-        gulp.src('README.adoc').pipe(connect.reload());
-    }
-}));
+    gulp.src('README.adoc').pipe(connect.reload());
+});
 
 gulp.task('watch', preparePlaybook(function (playbook, filename) {
-    return function () {
-        const dirs = playbook.content.sources
-            .map(source => [
-                `${source.url}/**/**.yml`,
-                `${source.url}/**/**.adoc`
-            ]);
-        dirs.push([filename]);
-        gulp.watch(dirs, ['preview']);
-    }
+    const dirs = playbook.content.sources
+        .map(source => [
+            `${source.url}/**/**.yml`,
+            `${source.url}/**/**.adoc`
+        ]);       
+    dirs.push([filename]);
+    gulp.watch(dirs, ['preview']);
 }));
 
 gulp.task('connect', preparePlaybook(function (playbook) {
@@ -74,11 +72,9 @@ gulp.task('connect', preparePlaybook(function (playbook) {
         port: 5353,
         livereload: true,
         root: playbook.output.dir,
-    };
-    return function () {
-        connect.server(connectOptions);
-        open(`http://localhost:${connectOptions.port}`)
-    }
+    };    
+    connect.server(connectOptions);
+    open(`http://localhost:${connectOptions.port}`)    
 }));
 
 gulp.task('open', function () {
@@ -88,16 +84,19 @@ gulp.task('open', function () {
 gulp.task('default', ['connect', 'watch', 'build']);
 
 function preparePlaybook(func) {
-    const options = commandLineArgs(optionDefinitions, {partial: true});
-    let filename = options.playbook;
-    let playbook = yaml.safeLoad(fs.readFileSync(options.source, 'UTF-8'));
-
-    if (!!!filename) {
-        filename = loadDevPlaybook(options, playbook)
-    }
-
     // returns a function which will be called by gulp task
-    return func(playbook, filename)
+    return function (cb) {
+        if (!!!playbook) {
+            const options = commandLineArgs(optionDefinitions, {partial: true});
+            filename = options.playbook;
+            playbook = yaml.safeLoad(fs.readFileSync(options.source, 'UTF-8'));
+        
+            if (!!!filename) {
+                filename = loadDevPlaybook(options, playbook)
+            }
+        }        
+        func(playbook, filename, cb)
+    }
 }
 
 // Uses playbook specified through p/playbook option or creates one on the fly
