@@ -125,8 +125,8 @@ function loadDevPlaybook(options, playbook) {
     fs.writeFileSync(filename, yamlDoc);
 
     if (!options.keep) {
-        exitHook(() => {
-            fs.unlink(filename);
+        exitHook(function() {
+            fs.unlinkSync(filename);
         });
     }
 
