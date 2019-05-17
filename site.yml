@@ -18,5 +18,8 @@ ui:
 output:
   dir: ./docs
 asciidoc:
+  attributes:
+    imagesdir: '{moduledir}/assets/images'
+    source-highlighter: highlightjs
   extensions:
   - asciidoctor-plantuml
