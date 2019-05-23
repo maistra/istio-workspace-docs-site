@@ -34,7 +34,7 @@ jobs:
             - node-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install Netlify CLI
-          command: npm install netlify-cli -g
+          command: sudo npm install netlify-cli -g
       - run:
           name: Install Dependencies
           command: npm run init
