@@ -37,12 +37,14 @@ jobs:
           command: sudo npm install netlify-cli -g
       - run:
           name: Install Dependencies
-          command: npm run init
+          command: |
+            sudo npm install -g gulp
+            npm install
       - run:
           name: Build website
           command: npm run build
       - run:
-          name: Netlify Deploy
+          name: Deploy docs website to Netlify
           command: netlify deploy --dir docs --message "Built from Circle-CI $CIRCLE_BUILD_URL" --site $NETLIFY_SITE_ID --prod
       - save_cache:
           key: node-cache-{{ checksum "package-lock.json" }}
