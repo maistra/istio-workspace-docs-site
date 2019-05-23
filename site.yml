@@ -6,8 +6,8 @@ site:
   start_page: istio-workspace::index.adoc
 content:
   sources:
-  - url: https://github.com/maistra/istio-workspace.git
-    branches: [master]
+  - url: https://github.com/bartoszmajsak/istio-workspace.git
+    branches: [docs_getting_started]
     tags: v*
     start_path: docs
 ui:
