@@ -1,0 +1,47 @@
+version: 2.1
+jobs:
+  build-ike:
+    working_directory: /go/src/github.com/maistra/istio-workspace
+    docker:
+      - image: circleci/golang:1.12.5
+    steps:
+      - checkout github.com/maistra/istio-workspace      
+      - run: make tools
+      - run: make
+      - persist_to_workspace:
+          ## We need ike binary while generating docs
+          root: dist
+          paths:
+            - ike
+  publish-docs:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: dist
+      - run: export PATH="$PATH:${PWD}/dist"
+      - checkout      
+      # - restore_cache:
+      #     keys:
+      #       - node-cache-{{ checksum "package-json.lock" }}
+      # - run:
+      #     name: Install Netlify CLI
+      #     command: npm install netlify-cli -g
+      # - run:
+      #     name: Install Dependencies
+      #     command: npm run init
+      # - save_cache:
+      #     key: node-cache-{{ checksum "package-json.lock" }}
+      #     paths:
+      #       - ./node_modules
+      - run: ike version
+    
+
+workflows:
+  version: 2.1
+  docs:
+    jobs:
+      - build-ike
+      - publish-docs:
+        requires: build-ike
