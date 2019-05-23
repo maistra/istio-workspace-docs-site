@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/golang:1.12.5
     steps:
-      - checkout github.com/maistra/istio-workspace      
+      - run: git clone https://github.com/maistra/istio-workspace .    
       - run: make tools
       - run: make
       - persist_to_workspace:
