@@ -2,7 +2,7 @@ runtime:
   cache_dir: ./.cache/antora
 site:
   title: Istio Workspace
-  url: http://maistra.github.io/istio-workspace-docs-site
+  url: https://maistra.github.io/istio-workspace-docs-site
   start_page: istio-workspace::index.adoc
 content:
   sources:
