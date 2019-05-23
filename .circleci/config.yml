@@ -7,7 +7,7 @@ jobs:
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
       - run: make tools
-      - run: make
+      - run: make deps compile ## we only care about the binary at this point
       - persist_to_workspace:
           ## We need ike binary while generating docs
           root: dist
