@@ -44,4 +44,5 @@ workflows:
     jobs:
       - build-ike
       - publish-docs:
-        requires: build-ike
+          requires: 
+            - build-ike
