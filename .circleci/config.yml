@@ -31,7 +31,7 @@ jobs:
           at: dist
       - restore_cache:
           keys:
-            - node-cache-{{ checksum "package-json.lock" }}
+            - node-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install Netlify CLI
           command: npm install netlify-cli -g
@@ -45,7 +45,7 @@ jobs:
           name: Netlify Deploy
           command: netlify deploy --dir docs --message "Built from Circle-CI $CIRCLE_BUILD_URL" --site $NETLIFY_SITE_ID --prod
       - save_cache:
-          key: node-cache-{{ checksum "package-json.lock" }}
+          key: node-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run: export PATH="$PATH:${CIRCLE_WORKING_DIRECTORY}/dist" && ike version
