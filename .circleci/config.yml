@@ -40,7 +40,9 @@ jobs:
           command: |
             sudo npm install -g gulp
             npm install
-      - run: echo 'export PATH=$PATH:${CIRCLE_WORKING_DIRECTORY}/dist' >> $BASH_ENV
+      - run: |
+          echo 'export PATH=$PATH:${CIRCLE_WORKING_DIRECTORY}/dist' >> $BASH_ENV
+          source /home/circleci/.bashrc
       - run:
           name: Build website
           command: npm run build
@@ -51,7 +53,7 @@ jobs:
           key: node-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run: export PATH="$PATH:${CIRCLE_WORKING_DIRECTORY}/dist" && ike version
+      - run: ike version
     
 
 workflows:
