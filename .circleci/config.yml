@@ -6,8 +6,17 @@ jobs:
       - image: circleci/golang:1.12.5
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
+      - restore_cache:
+          keys:
+            - vendor-cache-{{ checksum "Gopkg.lock" }}
+
       - run: make tools
       - run: make deps compile ## we only care about the binary at this point
+
+      - save_cache:
+          key: vendor-cache-{{ checksum "Gopkg.lock" }}
+          paths:
+            - ./vendor
       - persist_to_workspace:
           ## We need ike binary while generating docs
           root: dist
