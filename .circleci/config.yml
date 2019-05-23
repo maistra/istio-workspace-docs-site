@@ -42,7 +42,9 @@ jobs:
             npm install
       - run:
           name: Build website
-          command: npm run build
+          command: |
+            export PATH="$PATH:${CIRCLE_WORKING_DIRECTORY}/dist" && \
+            npm run build
       - run:
           name: Deploy docs website to Netlify
           command: netlify deploy --dir docs --message "Built from Circle-CI $CIRCLE_BUILD_URL" --site $NETLIFY_SITE_ID --prod
