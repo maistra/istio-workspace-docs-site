@@ -40,11 +40,10 @@ jobs:
           command: |
             sudo npm install -g gulp
             npm install
+      - run: echo 'export PATH=$PATH:${CIRCLE_WORKING_DIRECTORY}/dist' >> $BASH_ENV
       - run:
           name: Build website
-          command: |
-            export PATH="$PATH:${CIRCLE_WORKING_DIRECTORY}/dist" && \
-            npm run build
+          command: npm run build
       - run:
           name: Deploy docs website to Netlify
           command: netlify deploy --dir docs --message "Built from Circle-CI $CIRCLE_BUILD_URL" --site $NETLIFY_SITE_ID --prod
