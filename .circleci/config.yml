@@ -21,7 +21,7 @@ jobs:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
           at: dist
-      - run: export PATH="$PATH:${PWD}/dist"
+      - run: export PATH="$PATH:${CIRCLE_WORKING_DIRECTORY}/dist"
       # - restore_cache:
       #     keys:
       #       - node-cache-{{ checksum "package-json.lock" }}
