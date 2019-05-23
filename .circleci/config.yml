@@ -28,21 +28,26 @@ jobs:
     steps:
       - checkout      
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
           at: dist
-      # - restore_cache:
-      #     keys:
-      #       - node-cache-{{ checksum "package-json.lock" }}
-      # - run:
-      #     name: Install Netlify CLI
-      #     command: npm install netlify-cli -g
-      # - run:
-      #     name: Install Dependencies
-      #     command: npm run init
-      # - save_cache:
-      #     key: node-cache-{{ checksum "package-json.lock" }}
-      #     paths:
-      #       - ./node_modules
+      - restore_cache:
+          keys:
+            - node-cache-{{ checksum "package-json.lock" }}
+      - run:
+          name: Install Netlify CLI
+          command: npm install netlify-cli -g
+      - run:
+          name: Install Dependencies
+          command: npm run init
+      - run:
+          name: Build website
+          command: npm run build
+      - run:
+          name: Netlify Deploy
+          command: netlify deploy --dir docs --message "Built from Circle-CI $CIRCLE_BUILD_URL" --site $NETLIFY_SITE_ID --prod
+      - save_cache:
+          key: node-cache-{{ checksum "package-json.lock" }}
+          paths:
+            - ./node_modules
       - run: export PATH="$PATH:${CIRCLE_WORKING_DIRECTORY}/dist" && ike version
     
 
