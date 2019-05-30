@@ -7,7 +7,7 @@ site:
 content:
   sources:
   - url: https://github.com/bartoszmajsak/istio-workspace.git
-    branches: [docs_getting_started]
+    branches: docs_getting_started
     tags: v*
     start_path: docs
 ui:
