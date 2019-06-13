@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: circleci/golang:1.12.5
     steps:
-      - run: git clone https://github.com/bartoszmajsak/istio-workspace .    
-      - run: git checkout docs_getting_started
+      - run: git clone https://github.com/maistra/istio-workspace .    
+      - run: git checkout master
       - restore_cache:
           keys:
             - vendor-cache-{{ checksum "Gopkg.lock" }}
