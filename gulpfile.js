@@ -61,7 +61,8 @@ gulp.task('watch', preparePlaybook(function (playbook, filename) {
     const dirs = playbook.content.sources
         .map(source => [
             `${source.url}/**/**.yml`,
-            `${source.url}/**/**.adoc`
+            `${source.url}/**/**.adoc`,
+            `${source.url}/dist/ike`
         ]);       
     dirs.push([filename]);
     gulp.watch(dirs, ['preview']);
