@@ -11,6 +11,7 @@ const open = require('open');
 const yaml = require('js-yaml');
 const commandLineArgs = require('command-line-args');
 const generator = require('@antora/site-generator-default');
+const dateTime = require('date-time');
 
 const optionDefinitions = [
     {name: 'source', alias: 's', type: String, defaultValue: 'site.yml'},
@@ -38,7 +39,7 @@ gulp.task('build', preparePlaybook(function (playbook, filename, cb) {
         "--playbook",
         filename
     ];
-
+    process.env.IKE_DOCS_BUILT_AT = dateTime({local: false, showTimeZone: true});
     generator(args, process.env).then(() => {
         cb();
     }).catch(err => {
