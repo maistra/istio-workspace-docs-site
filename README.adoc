@@ -1,4 +1,4 @@
-:url-docs: https://github.com/bartoszmajsak/istio-workspace/tree/docs
+:url-docs: https://github.com/maistra/istio-workspace/tree/docs
 
 == Before you start
 
