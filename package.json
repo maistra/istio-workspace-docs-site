@@ -26,6 +26,6 @@
   "scripts": {
     "init": "npm install -g gulp && npm install",
     "build": "gulp build -p site.yml",
-    "preview": "gulp -d ../istio-workspace"
+    "preview": "gulp -d ../istio-workspace -b $(git -C ../istio-workspace rev-parse --abbrev-ref HEAD)"
   }
 }
