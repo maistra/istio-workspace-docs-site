@@ -64,7 +64,7 @@ gulp.task('watch', preparePlaybook(function (playbook, filename) {
             `${source.url}/**/**.yml`,
             `${source.url}/**/**.adoc`,
             `${source.url}/dist/ike`
-        ]);       
+        ]);
     dirs.push([filename]);
     gulp.watch(dirs, ['preview']);
 }));
@@ -75,9 +75,9 @@ gulp.task('connect', preparePlaybook(function (playbook) {
         port: 5353,
         livereload: true,
         root: playbook.output.dir,
-    };    
+    };
     connect.server(connectOptions);
-    open(`http://localhost:${connectOptions.port}`)    
+    open(`http://localhost:${connectOptions.port}`)
 }));
 
 gulp.task('open', function () {
@@ -93,12 +93,11 @@ function preparePlaybook(func) {
             const options = commandLineArgs(optionDefinitions, {partial: true});
             filename = options.playbook;
             playbook = yaml.safeLoad(fs.readFileSync(options.source, 'UTF-8'));
-        
             if (!!!filename) {
-                filename = loadDevPlaybook(options, playbook)
+                filename = loadDevPlaybook(options, playbook);
             }
-        }        
-        func(playbook, filename, cb)
+        }
+        func(playbook, filename, cb);
     }
 }
 
@@ -120,7 +119,7 @@ function loadDevPlaybook(options, playbook) {
     playbook.content.sources.forEach((e, i) => {
         e.url = options.dir[i % options.dir.length];
         if (!!options.branch) {
-            e.branches = [options.branch]
+            e.branches = [options.branch];
         }
     });
 
@@ -129,7 +128,7 @@ function loadDevPlaybook(options, playbook) {
     fs.writeFileSync(filename, yamlDoc);
 
     if (!options.keep) {
-        exitHook(function() {
+        exitHook(function () {
             fs.unlinkSync(filename);
         });
     }
