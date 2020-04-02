@@ -16,7 +16,7 @@ This documentation is generated from {url-docs}
 
 This project comes with a preview mode too, using which you can instantly see the changes of the docs you are working on.
 
-To use it, run the following:
+To use it, please do the following:
 
 . Install dependencies.
 +
@@ -28,7 +28,10 @@ npm run init
 . Install the LiveReload https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en[chrome extension].
 
 . Start the preview mode.
-The web server's host URL is printed to the console after the `watch` task completes.
+Assuming docs and source repositories directories live next to each other (e.g. in the same parent folder) you can
+simply run `npm rum preview`. This will build docs against currently active branch in the source repository.
++
+If your documentation source directory lives somewhere else you can directly `gulp` instead.
 +
 [source,bash]
 ----
@@ -36,9 +39,9 @@ gulp -d DOCS_DIRECTORY
 ----
 +
 Where `DOCS_DIRECTORY` points to your local clone of {url-docs}.
-
-TIP: If your docs and source repositories directories live next to each other (e.g. in the same parent folder) can simply run `npm rum preview` instead.
-
++
+IMPORTANT: By default it will use `master` branch. If you want other branch you can pass it in `-b` flag
++
 . The console output will print status information every time a change is detected.
 +
 [source,bash]
