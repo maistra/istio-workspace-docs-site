@@ -21,6 +21,7 @@ asciidoc:
   attributes:
     imagesdir: '{moduledir}/assets/images'
     source-highlighter: highlightjs
+    versioned-command: ike
   extensions:
   - asciidoctor-plantuml
   - ./lib/include-shell

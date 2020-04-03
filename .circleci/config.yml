@@ -24,10 +24,11 @@ jobs:
           paths:
             - ike
   publish-docs:
+    working_directory: /home/circleci/project
     docker:
       - image: circleci/node:10
     steps:
-      - checkout      
+      - checkout
       - attach_workspace:
           at: dist
       - restore_cache:
@@ -38,12 +39,16 @@ jobs:
           command: sudo npm install netlify-cli -g
       - run:
           name: Install Dependencies
+          command: sudo npm install -g gulp && npm install
+      - run:
+          name: Set up path
           command: |
-            sudo npm install -g gulp
-            npm install
-      - run: |
-          echo 'export PATH=$PATH:${CIRCLE_WORKING_DIRECTORY}/dist' >> $BASH_ENV
-          source /home/circleci/.bashrc
+            mv /home/circleci/project/dist/ike /home/circleci/project/dist/ike_latest
+            echo 'export PATH=$PATH:${CIRCLE_WORKING_DIRECTORY}/dist:${CIRCLE_WORKING_DIRECTORY}/scripts' >> $BASH_ENV
+            source /home/circleci/.bashrc
+      - run:
+          name: Download released binaries
+          command: download_releases.sh "/home/circleci/project/dist"
       - run:
           name: Build website
           command: npm run build
@@ -54,8 +59,6 @@ jobs:
           key: node-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run: ike version
-    
 
 workflows:
   version: 2.1
