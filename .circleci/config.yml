@@ -3,7 +3,7 @@ jobs:
   build-ike:
     working_directory: /go/src/github.com/maistra/istio-workspace
     docker:
-      - image: circleci/golang:1.14.1
+      - image: circleci/golang:1.14.3
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
       - run: git checkout master
