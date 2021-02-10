@@ -26,7 +26,7 @@ jobs:
   publish-docs:
     working_directory: /home/circleci/project
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:10 # see https://stackoverflow.com/questions/55921442/how-to-fix-referenceerror-primordials-is-not-defined-in-node
     steps:
       - checkout
       - attach_workspace:
