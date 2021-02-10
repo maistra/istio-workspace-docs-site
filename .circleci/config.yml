@@ -36,10 +36,10 @@ jobs:
             - node-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install Netlify CLI
-          command: sudo npm install netlify-cli -g
+          command: sudo npm install netlify-cli -g --unsafe-perm=true --allow-root
       - run:
           name: Install Dependencies
-          command: sudo npm install -g gulp && npm install
+          command: sudo npm install -g gulp --unsafe-perm=true --allow-root && npm install
       - run:
           name: Set up path
           command: |
