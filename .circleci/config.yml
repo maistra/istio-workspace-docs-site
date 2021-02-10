@@ -3,19 +3,19 @@ jobs:
   build-ike:
     working_directory: /go/src/github.com/maistra/istio-workspace
     docker:
-      - image: circleci/golang:1.14.3
+      - image: circleci/golang:1.15.5
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
       - run: git checkout master
       - restore_cache:
           keys:
-            - vendor-cache-{{ checksum "Gopkg.lock" }}
+            - vendor-cache-{{ checksum "go.sum" }}
 
       - run: make tools
       - run: make deps compile ## we only care about the binary at this point
 
       - save_cache:
-          key: vendor-cache-{{ checksum "Gopkg.lock" }}
+          key: vendor-cache-{{ checksum "go.sum" }}
           paths:
             - ./vendor
       - persist_to_workspace:
@@ -36,7 +36,7 @@ jobs:
             - node-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install Netlify CLI
-          command: sudo npm install netlify-cli -g
+          command: sudo npm install netlify-cli@3.5.0 -g # 3.6.0 causing permission issues
       - run:
           name: Install Dependencies
           command: sudo npm install -g gulp && npm install
