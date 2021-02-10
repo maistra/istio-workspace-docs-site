@@ -1,5 +1,6 @@
 ### Project specific settings ###
 .cache/
+bin/
 public/
 docs/
 docs-dev/
