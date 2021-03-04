@@ -24,4 +24,4 @@ asciidoc:
     versioned-command: ike
   extensions:
   - asciidoctor-plantuml
-  - ./lib/include-shell
+  - ./lib/include-shell/antora-lib
