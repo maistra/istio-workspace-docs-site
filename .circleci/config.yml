@@ -39,7 +39,9 @@ jobs:
           command: sudo npm install netlify-cli -g --unsafe-perm=true --allow-root
       - run:
           name: Install Dependencies
-          command: sudo npm install -g gulp --unsafe-perm=true --allow-root && npm install
+          command: |
+            sudo npm install -g gulp --unsafe-perm=true --allow-root && npm install
+            sudo wget https://github.com/mikefarah/yq/releases/download/v4.6.1/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
       - run:
           name: Set up path
           command: |
