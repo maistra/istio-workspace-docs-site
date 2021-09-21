@@ -1,21 +1,21 @@
 version: 2.1
 jobs:
   build-ike:
-    working_directory: /go/src/github.com/maistra/istio-workspace
+    working_directory: go/src/github.com/maistra/istio-workspace
     docker:
-      - image: circleci/golang:1.16.2
+      - image: cimg/go:1.17
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
       - run: git checkout master
       - restore_cache:
           keys:
-            - vendor-cache-{{ checksum "go.sum" }}
+            - vendor-cache-{{ checksum "go.sum" }}-1
 
       - run: make tools
       - run: make deps compile ## we only care about the binary at this point
 
       - save_cache:
-          key: vendor-cache-{{ checksum "go.sum" }}
+          key: vendor-cache-{{ checksum "go.sum" }}-1
           paths:
             - ./vendor
       - persist_to_workspace:
