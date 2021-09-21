@@ -9,13 +9,13 @@ jobs:
       - run: git checkout master
       - restore_cache:
           keys:
-            - vendor-cache-{{ checksum "go.sum" }}
+            - vendor-cache-{{ checksum "go.sum" }}-1
 
       - run: make tools
       - run: make deps compile ## we only care about the binary at this point
 
       - save_cache:
-          key: vendor-cache-{{ checksum "go.sum" }}
+          key: vendor-cache-{{ checksum "go.sum" }}-1
           paths:
             - ./vendor
       - persist_to_workspace:
