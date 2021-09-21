@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build-ike:
-    working_directory: /home/circleci/go/src/github.com/maistra/istio-workspace
+    working_directory: go/src/github.com/maistra/istio-workspace
     docker:
       - image: cimg/go:1.17
     steps:
