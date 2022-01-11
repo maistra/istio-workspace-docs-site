@@ -3,7 +3,7 @@ jobs:
   build-ike:
     working_directory: go/src/github.com/maistra/istio-workspace
     docker:
-      - image: cimg/go:1.17
+      - image: cimg/go:1.17.6
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
       - run: git checkout master
@@ -26,7 +26,7 @@ jobs:
   publish-docs:
     working_directory: /home/circleci/project
     docker:
-      - image: circleci/node:10 # see https://stackoverflow.com/questions/55921442/how-to-fix-referenceerror-primordials-is-not-defined-in-node
+      - image: circleci/node:16 # see https://stackoverflow.com/questions/55921442/how-to-fix-referenceerror-primordials-is-not-defined-in-node
     steps:
       - checkout
       - attach_workspace:
@@ -41,7 +41,7 @@ jobs:
           name: Install Dependencies
           command: |
             sudo npm install -g gulp --unsafe-perm=true --allow-root && npm install
-            sudo wget https://github.com/mikefarah/yq/releases/download/v4.6.1/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
+            sudo wget https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
       - run:
           name: Set up path
           command: |
