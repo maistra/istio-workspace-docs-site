@@ -12,6 +12,7 @@ const yaml = require('js-yaml');
 const commandLineArgs = require('command-line-args');
 const generator = require('@antora/site-generator-default');
 const dateTime = require('date-time');
+const { doesNotMatch } = require('assert');
 
 const optionDefinitions = [
     {name: 'source', alias: 's', type: String, defaultValue: 'site.yml'},
@@ -25,7 +26,7 @@ const optionDefinitions = [
 let playbook;
 let filename;
 
-gulp.task('build', preparePlaybook(function (playbook, filename, cb) {
+gulp.task('build', preparePlaybook(function (playbook, filename, done) {
     /**
      * Use the '@antora/site-generator-default' node module to build.
      * It's analogous to `$ antora --playbook site-dev.yml`.
@@ -41,24 +42,25 @@ gulp.task('build', preparePlaybook(function (playbook, filename, cb) {
     ];
     process.env.IKE_DOCS_BUILT_AT = dateTime({local: false, showTimeZone: true});
     generator(args, process.env).then(() => {
-        cb();
+        done();
     }).catch(err => {
         console.log(err);
-        cb();
+        done();
     })
 
 }));
 
-gulp.task('preview', ['build'], function () {
+gulp.task('preview', gulp.series('build', (done) => {
     /**
      * Remove the line gulp.src('README.adoc')
      * This is placeholder code to follow the gulp-connect
      * example. Could not make it work any other way.
      */
     gulp.src('README.adoc').pipe(connect.reload());
-});
+    done()
+}));
 
-gulp.task('watch', preparePlaybook(function (playbook, filename) {
+gulp.task('watch', preparePlaybook(function (playbook, filename, done) {
     const dirs = playbook.content.sources
         .map(source => [
             `${source.url}/**/**.yml`,
@@ -66,7 +68,7 @@ gulp.task('watch', preparePlaybook(function (playbook, filename) {
             `${source.url}/dist/ike`
         ]);
     dirs.push([filename]);
-    gulp.watch(dirs, ['preview']);
+    gulp.watch(dirs, gulp.series('preview'));
 }));
 
 gulp.task('connect', preparePlaybook(function (playbook) {
@@ -80,11 +82,12 @@ gulp.task('connect', preparePlaybook(function (playbook) {
     open(`http://localhost:${connectOptions.port}`)
 }));
 
-gulp.task('open', function () {
+gulp.task('open', (done) => {
     open('docs/index.html');
+    done()
 });
 
-gulp.task('default', ['connect', 'watch', 'build']);
+gulp.task('default', gulp.series('build', 'connect', 'watch'));
 
 function preparePlaybook(func) {
     // returns a function which will be called by gulp task
