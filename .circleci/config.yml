@@ -10,23 +10,21 @@ jobs:
       - restore_cache:
           keys:
             - vendor-cache-{{ checksum "go.sum" }}-1
-
       - run: make tools
       - run: make deps compile ## we only care about the binary at this point
-
       - save_cache:
           key: vendor-cache-{{ checksum "go.sum" }}-1
           paths:
             - ./vendor
       - persist_to_workspace:
-          ## We need ike binary while generating docs
+          ## We need latest ike binary while generating docs
           root: dist
           paths:
             - ike
   publish-docs:
     working_directory: /home/circleci/project
     docker:
-      - image: circleci/node:16 # see https://stackoverflow.com/questions/55921442/how-to-fix-referenceerror-primordials-is-not-defined-in-node
+      - image: circleci/node:16
     steps:
       - checkout
       - attach_workspace:
