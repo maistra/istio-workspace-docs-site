@@ -10,7 +10,7 @@ const exitHook = require('exit-hook');
 const open = require('open');
 const yaml = require('js-yaml');
 const commandLineArgs = require('command-line-args');
-const generator = require('@antora/site-generator-default');
+const generator = require('@antora/site-generator');
 const dateTime = require('date-time');
 const { doesNotMatch } = require('assert');
 
