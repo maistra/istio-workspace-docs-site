@@ -3,7 +3,7 @@ jobs:
   build-ike:
     working_directory: go/src/github.com/maistra/istio-workspace
     docker:
-      - image: cimg/go:1.17.6
+      - image: cimg/go:1.19.2
     steps:
       - run: git clone https://github.com/maistra/istio-workspace .    
       - run: git checkout master
