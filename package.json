@@ -23,7 +23,7 @@
     "open": "6.2.0"
   },
   "devDependencies": {
-    "netlify-cli": "^8.6.18"
+    "netlify-cli": "^12.12.0"
   },
   "scripts": {
     "init": "npm install -g gulp && npm install",
